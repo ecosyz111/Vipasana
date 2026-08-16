@@ -1,0 +1,17 @@
+{
+  "name": "Vipasana",
+  "short_name": "Vipasana",
+  "description": "Watch the breath. Name the feeling. Return through the day.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f1e8d8",
+  "theme_color": "#1a3228",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

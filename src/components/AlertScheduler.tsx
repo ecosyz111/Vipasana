@@ -1,0 +1,57 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { dueUnfired, kindHref } from "@/lib/alerts";
+import { loadStore, markFired } from "@/lib/storage";
+import type { AlertRule } from "@/lib/types";
+
+export function AlertScheduler() {
+  const [banner, setBanner] = useState<AlertRule | null>(null);
+
+  useEffect(() => {
+    const tick = () => {
+      const store = loadStore();
+      const due = dueUnfired(store);
+      if (!due.length) return;
+      const next = due[0];
+      markFired(next.id);
+      setBanner(next);
+      if (store.notificationsEnabled && "Notification" in window && Notification.permission === "granted") {
+        try {
+          new Notification(next.label, {
+            body: next.message,
+            tag: next.id,
+            silent: false,
+          });
+        } catch {
+          /* ignore blocked notifications */
+        }
+      }
+    };
+
+    tick();
+    const id = window.setInterval(tick, 15000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  if (!banner) return null;
+
+  return (
+    <div className="border-b border-saffron/40 bg-forest text-cream">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+        <p className="text-sm leading-relaxed">
+          <span className="font-medium tracking-wide">{banner.label}.</span> {banner.message}
+        </p>
+        <div className="flex gap-2">
+          <Link href={kindHref(banner.kind)} className="btn btn-saffron py-1.5 text-sm">
+            Begin
+          </Link>
+          <button type="button" className="btn btn-ghost border-cream/30 py-1.5 text-sm text-cream" onClick={() => setBanner(null)}>
+            Later
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

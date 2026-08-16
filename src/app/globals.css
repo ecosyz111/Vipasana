@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+:root {
+  --stone: #f1e8d8;
+  --cream: #faf6ee;
+  --ink: #1b1712;
+  --ink-soft: #4a4338;
+  --forest: #1a3228;
+  --moss: #2f4a3c;
+  --sage: #7d917f;
+  --saffron: #c56a2d;
+  --sand: #e4d5bc;
+  --line: #d8cbb4;
+  --muted: #6d6458;
+  --ok: #3d6b52;
+  --warn: #9a4a32;
+}
+
+@theme inline {
+  --color-stone: var(--stone);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-forest: var(--forest);
+  --color-moss: var(--moss);
+  --color-sage: var(--sage);
+  --color-saffron: var(--saffron);
+  --color-sand: var(--sand);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-cormorant);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--stone);
+  color: var(--ink);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+::selection {
+  background: #d7c4a4;
+  color: var(--ink);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  padding: 0.72rem 1.25rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-forest {
+  background: var(--forest);
+  color: var(--cream);
+}
+
+.btn-saffron {
+  background: var(--saffron);
+  color: #fff8ef;
+}
+
+.btn-ghost {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+}
+
+.orb {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(250, 246, 238, 0.35), transparent 42%),
+    radial-gradient(circle at 50% 55%, #c56a2d 0%, #2f4a3c 48%, #1a3228 78%);
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.86);
+    opacity: 0.82;
+  }
+  40% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  55% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.orb-live {
+  animation: breathe 10s ease-in-out infinite;
+}
+
+.wave {
+  stroke-dasharray: 6 10;
+  animation: drift 8s linear infinite;
+}
+
+@keyframes drift {
+  to {
+    stroke-dashoffset: -160;
+  }
+}
