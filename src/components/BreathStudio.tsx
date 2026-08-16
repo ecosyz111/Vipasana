@@ -162,15 +162,15 @@ export function BreathStudio() {
 
   return (
     <div className="space-y-6">
-      <div className="overflow-hidden rounded-3xl bg-forest px-6 py-12 text-center text-cream sm:px-10">
-        <p className="text-xs uppercase tracking-[0.22em] text-sand/80">Anapana</p>
-        <h1 className="font-display mt-2 text-4xl sm:text-5xl">Stay with the natural breath</h1>
+      <div className="overflow-hidden rounded-3xl bg-forest px-4 py-8 text-center text-cream sm:px-10 sm:py-12">
+        <p className="text-[11px] uppercase tracking-[0.22em] text-sand/80 sm:text-xs">Anapana</p>
+        <h1 className="font-display mt-2 text-[2rem] leading-tight sm:text-5xl">Stay with the natural breath</h1>
         <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-cream/70">
           Do not control it. Feel it where it enters and leaves. If the mind wanders, return. The
           microphone is optional — it only watches volume so you can see the cycle.
         </p>
 
-        <div className="relative mx-auto mt-10 flex h-64 w-64 items-center justify-center sm:h-72 sm:w-72">
+        <div className="relative mx-auto mt-8 flex aspect-square w-[min(16.5rem,70vw)] items-center justify-center sm:mt-10 sm:w-72">
           <div
             className={`orb absolute inset-6 rounded-full ${running && mode === "observe" ? "orb-live" : ""}`}
             style={
@@ -188,19 +188,19 @@ export function BreathStudio() {
         </div>
 
         {mode === "mic" && running && (
-          <div className="mx-auto mt-4 h-1.5 w-48 overflow-hidden rounded-full bg-cream/15">
+          <div className="mx-auto mt-4 h-1.5 w-48 max-w-full overflow-hidden rounded-full bg-cream/15">
             <div className="h-full bg-saffron" style={{ width: `${Math.round(level * 100)}%` }} />
           </div>
         )}
 
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
+        <div className="mt-7 flex flex-wrap justify-center gap-2 sm:mt-8">
           {PRESETS.map((m) => (
             <button
               key={m}
               type="button"
               disabled={running}
               onClick={() => setTargetMin(m)}
-              className={`rounded-full px-3 py-1 text-sm ${
+              className={`min-h-10 rounded-full px-3 py-1.5 text-sm ${
                 targetMin === m ? "bg-saffron text-cream" : "bg-cream/10 text-cream/80"
               }`}
             >
@@ -209,7 +209,7 @@ export function BreathStudio() {
           ))}
         </div>
 
-        <div className="mt-5 flex flex-wrap justify-center gap-2">
+        <div className="mt-4 flex flex-col justify-center gap-2 sm:mt-5 sm:flex-row sm:flex-wrap">
           <ModeButton active={mode === "observe"} disabled={running} onClick={() => setMode("observe")}>
             Observe
           </ModeButton>
@@ -220,13 +220,13 @@ export function BreathStudio() {
 
         {micError && <p className="mt-3 text-sm text-sand">{micError}</p>}
 
-        <div className="mt-8 flex justify-center gap-3">
+        <div className="mt-7 flex justify-center gap-3 sm:mt-8">
           {!running ? (
-            <button type="button" className="btn btn-saffron" onClick={start}>
+            <button type="button" className="btn btn-saffron w-full sm:w-auto" onClick={start}>
               Begin sit
             </button>
           ) : (
-            <button type="button" className="btn border border-cream/30 bg-transparent text-cream" onClick={finish}>
+            <button type="button" className="btn w-full border border-cream/30 bg-transparent text-cream sm:w-auto" onClick={finish}>
               Close the sit
             </button>
           )}
@@ -240,7 +240,7 @@ export function BreathStudio() {
       </div>
 
       {done && (
-        <div className="card p-6">
+        <div className="card p-5 sm:p-6">
           <h2 className="font-display text-2xl">The sitting is complete</h2>
           <p className="mt-2 text-sm text-ink-soft">
             {formatDuration(elapsed)}
@@ -255,16 +255,16 @@ export function BreathStudio() {
               value={note}
               onChange={(e) => setNote(e.target.value)}
               rows={3}
-              className="mt-2 w-full rounded-xl border border-line bg-stone px-3 py-2 text-sm text-ink outline-none focus:border-moss"
+              className="mt-2 w-full rounded-xl border border-line bg-stone px-3 py-2 text-base text-ink outline-none focus:border-moss sm:text-sm"
             />
           </label>
-          <div className="mt-4 flex gap-2">
-            <button type="button" className="btn btn-forest" onClick={save}>
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+            <button type="button" className="btn btn-forest w-full sm:w-auto" onClick={save}>
               Keep this sitting
             </button>
             <button
               type="button"
-              className="btn btn-ghost"
+              className="btn btn-ghost w-full sm:w-auto"
               onClick={() => {
                 setDone(false);
                 setElapsed(0);
@@ -313,7 +313,7 @@ function ModeButton({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`rounded-full px-4 py-1.5 text-sm ${active ? "bg-cream text-forest" : "bg-cream/10 text-cream/80"}`}
+      className={`min-h-10 w-full rounded-full px-4 py-1.5 text-sm sm:w-auto ${active ? "bg-cream text-forest" : "bg-cream/10 text-cream/80"}`}
     >
       {children}
     </button>

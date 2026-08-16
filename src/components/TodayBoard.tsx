@@ -41,10 +41,10 @@ export function TodayBoard() {
   }
 
   return (
-    <div className="space-y-8">
-      <section className="overflow-hidden rounded-3xl bg-forest px-6 py-10 text-cream sm:px-10">
-        <p className="text-xs uppercase tracking-[0.22em] text-sand/80">{greeting()}</p>
-        <h1 className="font-display mt-3 max-w-xl text-5xl leading-[1.05] sm:text-6xl">
+    <div className="space-y-6 sm:space-y-8">
+      <section className="overflow-hidden rounded-3xl bg-forest px-5 py-8 text-cream sm:px-10 sm:py-10">
+        <p className="text-[11px] uppercase tracking-[0.22em] text-sand/80 sm:text-xs">{greeting()}</p>
+        <h1 className="font-display mt-3 max-w-xl text-[2.35rem] leading-[1.05] sm:text-5xl lg:text-6xl">
           Watch the breath.
           <br />
           Name the feeling.
@@ -53,25 +53,25 @@ export function TodayBoard() {
           Anapana at the nostrils. Vedana as it is — pleasant, unpleasant, or neutral. Gentle
           alerts keep you returning through the day.
         </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/breath" className="btn btn-saffron">
+        <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+          <Link href="/breath" className="btn btn-saffron w-full sm:w-auto">
             Sit now
           </Link>
-          <Link href="/emotions" className="btn border border-cream/25 bg-transparent text-cream">
+          <Link href="/emotions" className="btn w-full border border-cream/25 bg-transparent text-cream sm:w-auto">
             Check in
           </Link>
         </div>
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <Stat label="Minutes today" value={String(minutes)} />
         <Stat label="Breaths counted" value={String(breaths)} />
         <Stat label="Check-ins" value={String(feelings.length)} />
         <Stat label="Sit streak" value={streak ? `${streak}d` : "—"} />
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="card p-6">
+      <section className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr] lg:gap-6">
+        <div className="card p-5 sm:p-6">
           <h2 className="font-display text-2xl">Today’s reading</h2>
           <p className="mt-3 text-sm leading-relaxed text-ink-soft">{todayInsight(store)}</p>
           {feelings[0] && (
@@ -80,7 +80,7 @@ export function TodayBoard() {
             </p>
           )}
         </div>
-        <div className="card p-6">
+        <div className="card p-5 sm:p-6">
           <h2 className="font-display text-2xl">Next alert</h2>
           {next ? (
             <>
@@ -97,8 +97,8 @@ export function TodayBoard() {
         </div>
       </section>
 
-      <section className="card p-6">
-        <div className="flex items-baseline justify-between gap-3">
+      <section className="card p-5 sm:p-6">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
           <h2 className="font-display text-2xl">The day’s remaining bells</h2>
           <span className="text-xs uppercase tracking-[0.16em] text-muted">
             {upcoming.filter((a) => a.enabled).length} set
@@ -106,12 +106,12 @@ export function TodayBoard() {
         </div>
         <ol className="mt-5 divide-y divide-line">
           {upcoming.map((a) => (
-            <li key={a.id} className="flex items-center justify-between gap-4 py-3">
-              <div>
+            <li key={a.id} className="flex items-start justify-between gap-3 py-3 sm:items-center sm:gap-4">
+              <div className="min-w-0">
                 <p className="text-sm font-medium">{a.label}</p>
-                <p className="text-xs text-muted">{a.message}</p>
+                <p className="text-xs leading-relaxed text-muted">{a.message}</p>
               </div>
-              <span className={`shrink-0 text-sm ${a.firedToday ? "text-sage" : "text-forest"}`}>
+              <span className={`shrink-0 pt-0.5 text-sm ${a.firedToday ? "text-sage" : "text-forest"}`}>
                 {a.firedToday ? "done" : a.time}
               </span>
             </li>
@@ -125,7 +125,7 @@ export function TodayBoard() {
             <h2 className="font-display text-2xl">Sits</h2>
             <ul className="mt-3 space-y-2">
               {sits.map((s) => (
-                <li key={s.id} className="card px-4 py-3 text-sm">
+                <li key={s.id} className="card px-4 py-3 text-sm leading-relaxed">
                   {formatTime(s.startedAt)} · {formatDuration(s.durationSec)} · {s.breaths} breaths · {s.mode}
                 </li>
               ))}
@@ -135,7 +135,7 @@ export function TodayBoard() {
             <h2 className="font-display text-2xl">Feelings</h2>
             <ul className="mt-3 space-y-2">
               {feelings.map((e) => (
-                <li key={e.id} className="card px-4 py-3 text-sm">
+                <li key={e.id} className="card px-4 py-3 text-sm leading-relaxed">
                   {formatTime(e.at)} · {e.vedana} · {e.feeling}
                   {e.body ? ` · ${e.body}` : ""}
                 </li>
@@ -150,9 +150,9 @@ export function TodayBoard() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="card px-4 py-4">
-      <p className="text-xs uppercase tracking-[0.16em] text-muted">{label}</p>
-      <p className="font-display mt-1 text-3xl">{value}</p>
+    <div className="card px-3 py-3 sm:px-4 sm:py-4">
+      <p className="text-[10px] uppercase tracking-[0.14em] text-muted sm:text-xs sm:tracking-[0.16em]">{label}</p>
+      <p className="font-display mt-1 text-2xl sm:text-3xl">{value}</p>
     </div>
   );
 }

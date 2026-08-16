@@ -23,6 +23,10 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Figma
+
+Artboards for Cover, Foundations, Today, Breath, Feel, Alerts, and Journal live at `/design` and `/figma/`. See [FIGMA.md](FIGMA.md) to import them with html.to.design.
+
 ## GitHub
 
 https://github.com/ecosyz111/Vipasana

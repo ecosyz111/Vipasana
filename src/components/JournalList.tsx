@@ -38,7 +38,7 @@ export function JournalList() {
   if (!days.length) {
     return (
       <div className="card p-8 text-center">
-        <h1 className="font-display text-4xl">The journal is empty</h1>
+        <h1 className="font-display text-3xl sm:text-4xl">The journal is empty</h1>
         <p className="mt-3 text-sm text-ink-soft">Sits and check-ins will gather here, on this device only.</p>
       </div>
     );
@@ -48,14 +48,14 @@ export function JournalList() {
     <div className="space-y-8">
       <header>
         <p className="text-xs uppercase tracking-[0.22em] text-muted">Review</p>
-        <h1 className="font-display mt-2 text-4xl sm:text-5xl">What arose, what passed</h1>
+        <h1 className="font-display mt-2 text-[2.1rem] leading-tight sm:text-5xl">What arose, what passed</h1>
       </header>
       {days.map(([day, row]) => {
         const minutes = Math.round(row.sessions.reduce((n, s) => n + s.durationSec, 0) / 60);
         const vedana = countVedana(row.emotions.map((e) => e.vedana));
         return (
           <article key={day} className="card p-5">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <div className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-2">
               <h2 className="font-display text-2xl">{formatShortDate(day)}</h2>
               <p className="text-xs uppercase tracking-[0.14em] text-muted">
                 {minutes} min · {row.emotions.length} check-ins · P{vedana.pleasant} U{vedana.unpleasant} N

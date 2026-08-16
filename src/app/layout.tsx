@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { AlertScheduler } from "@/components/AlertScheduler";
+import { AppShell } from "@/components/AppShell";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -31,6 +30,7 @@ export const viewport: Viewport = {
   themeColor: "#1a3228",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -41,9 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${cormorant.variable} antialiased bg-stone text-ink`}>
-        <AlertScheduler />
-        <Header />
-        <main className="mx-auto min-h-[70vh] w-full max-w-5xl px-4 pb-16 pt-6">{children}</main>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

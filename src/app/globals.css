@@ -38,11 +38,17 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   background: var(--stone);
   color: var(--ink);
   font-family: var(--font-outfit), system-ui, sans-serif;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 h1,
@@ -51,6 +57,7 @@ h3,
 .font-display {
   font-family: var(--font-cormorant), Georgia, serif;
   font-optical-sizing: auto;
+  overflow-wrap: anywhere;
 }
 
 ::selection {
@@ -65,13 +72,20 @@ h3,
   gap: 0.45rem;
   border-radius: 999px;
   padding: 0.72rem 1.25rem;
-  font-size: 0.9rem;
+  min-height: 2.75rem;
+  font-size: 0.95rem;
   letter-spacing: 0.02em;
-  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.btn:hover {
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .btn {
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .btn-forest {
@@ -94,6 +108,26 @@ h3,
   background: var(--cream);
   border: 1px solid var(--line);
   border-radius: 1.25rem;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+  max-width: 100%;
+}
+
+input[type="time"],
+select {
+  min-height: 2.75rem;
+}
+
+@media (min-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 0.875rem;
+  }
 }
 
 .orb {

@@ -42,21 +42,21 @@ export function AlertsManager() {
     <div className="space-y-6">
       <header>
         <p className="text-xs uppercase tracking-[0.22em] text-muted">The day’s bells</p>
-        <h1 className="font-display mt-2 text-4xl sm:text-5xl">Reminders to return</h1>
+        <h1 className="font-display mt-2 text-[2.1rem] leading-tight sm:text-5xl">Reminders to return</h1>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">
           Six gentle calls: morning sit, a midday vedana check, evening sitting, and short returns
           to the breath. Notifications work while this tab is open.
         </p>
       </header>
 
-      <div className="card flex flex-wrap items-center justify-between gap-4 p-5">
+      <div className="card flex flex-col gap-4 p-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <div>
           <p className="text-sm font-medium">Browser alerts</p>
           <p className="text-sm text-muted">
             {current.notificationsEnabled && perm === "granted" ? "Enabled" : "Off — enable to receive the day’s bells"}
           </p>
         </div>
-        <button type="button" className="btn btn-forest" onClick={enableNotes}>
+        <button type="button" className="btn btn-forest w-full sm:w-auto" onClick={enableNotes}>
           {perm === "granted" ? "Test a bell" : "Enable alerts"}
         </button>
       </div>
@@ -64,25 +64,27 @@ export function AlertsManager() {
 
       <ul className="space-y-3">
         {current.alerts.map((a) => (
-          <li key={a.id} className="card flex flex-wrap items-center gap-4 p-4">
-            <label className="flex items-center gap-2 text-sm">
+          <li key={a.id} className="card flex flex-col gap-3 p-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="flex items-center justify-between gap-3 sm:justify-start">
+              <label className="flex min-h-11 items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={a.enabled}
+                  onChange={(e) => patch(a.id, { enabled: e.target.checked })}
+                  className="h-4 w-4 accent-forest"
+                />
+                On
+              </label>
               <input
-                type="checkbox"
-                checked={a.enabled}
-                onChange={(e) => patch(a.id, { enabled: e.target.checked })}
-                className="accent-forest"
+                type="time"
+                value={a.time}
+                onChange={(e) => patch(a.id, { time: e.target.value })}
+                className="rounded-lg border border-line bg-stone px-2 py-1.5 text-base sm:text-sm"
               />
-              On
-            </label>
-            <input
-              type="time"
-              value={a.time}
-              onChange={(e) => patch(a.id, { time: e.target.value })}
-              className="rounded-lg border border-line bg-stone px-2 py-1.5 text-sm"
-            />
-            <div className="min-w-[12rem] flex-1">
+            </div>
+            <div className="min-w-0 flex-1">
               <p className="text-sm font-medium">{a.label}</p>
-              <p className="text-xs text-muted">{a.message}</p>
+              <p className="text-xs leading-relaxed text-muted">{a.message}</p>
             </div>
           </li>
         ))}

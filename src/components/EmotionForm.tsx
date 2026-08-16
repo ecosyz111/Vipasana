@@ -41,14 +41,14 @@ export function EmotionForm() {
     <form onSubmit={submit} className="space-y-6">
       <header>
         <p className="text-xs uppercase tracking-[0.22em] text-muted">Vedana</p>
-        <h1 className="font-display mt-2 text-4xl sm:text-5xl">What is here, before the story?</h1>
+        <h1 className="font-display mt-2 text-[2.1rem] leading-tight sm:text-5xl">What is here, before the story?</h1>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">
           Name the tone of sensation. Then, if you wish, name a feeling and where it sits in the
           body. Equanimity is the practice — not choosing a better mood.
         </p>
       </header>
 
-      <div className="grid gap-3 md:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-3">
         {VEDANA.map((v) => (
           <button
             key={v.id}
@@ -79,7 +79,7 @@ export function EmotionForm() {
                   key={f}
                   type="button"
                   onClick={() => setFeeling(f)}
-                  className={`rounded-full px-3 py-1.5 text-sm ${
+                  className={`min-h-10 rounded-full px-3 py-1.5 text-sm ${
                     feeling === f ? "bg-saffron text-cream" : "bg-sand text-ink"
                   }`}
                 >
@@ -106,7 +106,7 @@ export function EmotionForm() {
             <select
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              className="mt-2 w-full rounded-xl border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-moss"
+              className="mt-2 w-full rounded-xl border border-line bg-cream px-3 py-2 text-base outline-none focus:border-moss sm:text-sm"
             >
               {BODY_AREAS.map((b) => (
                 <option key={b} value={b}>
@@ -123,11 +123,11 @@ export function EmotionForm() {
               onChange={(e) => setNote(e.target.value)}
               rows={3}
               placeholder="No story required. A few words are enough."
-              className="mt-2 w-full rounded-xl border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-moss"
+              className="mt-2 w-full rounded-xl border border-line bg-cream px-3 py-2 text-base outline-none focus:border-moss sm:text-sm"
             />
           </label>
 
-          <button type="submit" className="btn btn-forest">
+          <button type="submit" className="btn btn-forest w-full sm:w-auto">
             Record this moment
           </button>
           {saved && <p className="text-sm text-ok">Noted. Let it pass.</p>}

@@ -39,15 +39,15 @@ export function AlertScheduler() {
 
   return (
     <div className="border-b border-saffron/40 bg-forest text-cream">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <p className="text-sm leading-relaxed">
           <span className="font-medium tracking-wide">{banner.label}.</span> {banner.message}
         </p>
         <div className="flex gap-2">
-          <Link href={kindHref(banner.kind)} className="btn btn-saffron py-1.5 text-sm">
+          <Link href={kindHref(banner.kind)} className="btn btn-saffron flex-1 py-1.5 text-sm sm:flex-none">
             Begin
           </Link>
-          <button type="button" className="btn btn-ghost border-cream/30 py-1.5 text-sm text-cream" onClick={() => setBanner(null)}>
+          <button type="button" className="btn btn-ghost flex-1 border-cream/30 py-1.5 text-sm text-cream sm:flex-none" onClick={() => setBanner(null)}>
             Later
           </button>
         </div>
